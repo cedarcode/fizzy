@@ -8,16 +8,16 @@ image: fizzy
 # Where to deploy fizzy
 servers:
   web:
-    - fizzy.example.com  # Set your server name here
+    - 3.233.189.168
 
 # How you connect to your server
 ssh:
-  user: root  # If you use a different username to SSH to your server, specify it here
+  user: ubuntu
 
 # Automatic SSL
 proxy:
-  ssl: true                # Set this to false if you *don't* want SSL
-  host: fizzy.example.com  # Set your server name here to use automatic SSL
+  ssl: true
+  host: fizzy.cedarcode.dev
 
 # Your application configuration (secrets come from .kamal/secrets).
 env:
@@ -28,8 +28,8 @@ env:
     - SMTP_USERNAME
     - SMTP_PASSWORD
   clear:
-    BASE_URL: https://fizzy.example.com # The public URL of your Fizzy instance
-    MAILER_FROM_ADDRESS: support@example.com # The email "from" address that Fizzy sends email from
+    BASE_URL: https://fizzy.cedarcode.dev # The public URL of your Fizzy instance
+    MAILER_FROM_ADDRESS: fizzy@cedarcode.dev # The email "from" address that Fizzy sends email from
     SMTP_ADDRESS: mail.example.com # The SMTP server you'll use to send email
     MULTI_TENANT: false # Set to true to allow multiple accounts to sign up
     SOLID_QUEUE_IN_PUMA: true # Run background jobs in the app container
@@ -37,9 +37,10 @@ env:
 
 #-- General configuration --#
 
-# Use a local registry to deploy
 registry:
-  server: localhost:5555
+  server: 864100757851.dkr.ecr.us-east-1.amazonaws.com
+  username: AWS
+  password: <%= %x(aws ecr get-login-password).strip %>
 
 # Handy aliases for interacting with your deployment. For eaxmple: `bin/kamal console` will connect to a
 # Rails console in production.
