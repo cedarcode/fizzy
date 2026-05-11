@@ -40,7 +40,7 @@ env:
 registry:
   server: 864100757851.dkr.ecr.us-east-1.amazonaws.com
   username: AWS
-  password: <%= %x(aws ecr get-login-password).strip %>
+  password: <%= %x(aws ecr get-login-password)%>
 
 # Handy aliases for interacting with your deployment. For eaxmple: `bin/kamal console` will connect to a
 # Rails console in production.
